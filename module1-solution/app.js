@@ -35,7 +35,6 @@
         };
 
         function calculateMessage(items) {
-            console.log(items);
             if (items.length == 0) {
                 return config.messages['nodata'];
             }
