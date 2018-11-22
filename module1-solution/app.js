@@ -4,7 +4,13 @@
     var LunchCheckApp = angular.module('LunchCheck', []);
 
     LunchCheckApp.value('config', {
-        'threshold': 3
+        'threshold': 3,
+        'messages': {
+            'init': ['', 'text-body'],
+            'nodata': ['Please enter data first.', 'text-danger'],
+            'enjoy': ['Enjoy!', 'text-success'],
+            'toomuch': ['Too much!', 'text-success'],
+        }
     });
 
     LunchCheckApp.controller('LunchCheckController', LunchCheckController);
@@ -13,12 +19,14 @@
 
     function LunchCheckController($scope, config) {
         $scope.display_items = "";
-        $scope.check_output = "";
+        $scope.check_output = config.messages.init[0];
+        $scope.message_type = config.messages.init[1];
 
         $scope.runUpdate = function () {
             var items = updateItems($scope.display_items);
-            var check_text = calculateCheckText(items);
-            $scope.check_output = check_text;
+            var message = calculateMessage(items);
+            $scope.check_output = message[0];
+            $scope.message_type = message[1];
         };
 
         function updateItems(text) {
@@ -26,15 +34,15 @@
             return words.filter(w => w.length);
         };
 
-        function calculateCheckText(items) {
+        function calculateMessage(items) {
             console.log(items);
             if (items.length == 0) {
-                return "Please enter data first.";
+                return config.messages['nodata'];
             }
             if (items.length <= config.threshold)
-                return "Enjoy!";
+                return config.messages['enjoy'];
             else
-                return "Too much!";
+                return config.messages['toomuch'];
         };
 
     };
