@@ -31,16 +31,17 @@
             {name: "Yogurt", quantity: 3},
             {name: "Apple", quantity: 2},
         ];
+
         service.bought = [
         ];
 
         service.getItems = function (list_name) {
             return service[list_name];
-        }
+        };
 
         service.isEmpty = function (list_name) {
             return service[list_name].length === 0;
-        }
+        };
 
         service.tickItem = function (item_id) {
             var item = service.buyme.splice(item_id, 1);
