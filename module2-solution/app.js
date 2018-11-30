@@ -26,7 +26,7 @@
 
         service.buyme = [
             {name: "Bread", quantity: 1},
-            {name: "Butter", quantity: 0},
+            {name: "Butter", quantity: 2},
             {name: "Lettuce", quantity: 2},
             {name: "Yogurt", quantity: 3},
             {name: "Apple", quantity: 2},
