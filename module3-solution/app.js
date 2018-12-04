@@ -10,12 +10,11 @@
     function FoundItemsDirective () {
         var ddo = {
             scope: {
-                foundItems: '<'
+                items: '<'
             },
-            restrict: 'E',
             templateUrl: 'foundItems.html',
             controller: NarrowItDownController,
-            controlerAs: 'menu',
+            controllerAs: 'menu',
             bindToController: true
         };
 
