@@ -1,3 +1,8 @@
 <ul>
-    <li ng-repeat="item in menu.found">{{ item.name }}</li>
+    <li ng-repeat="item in menu.items">
+        {{ item.name }}
+        <button class="btn btn-secondary btn-sm"
+                ng-click="menu.onRemove({index: $index});">Don't want this one!</button>
+    </li>
+    <div>{{ menu.message }}</div>
 </ul>

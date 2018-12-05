@@ -10,7 +10,9 @@
     function FoundItemsDirective () {
         var ddo = {
             scope: {
-                items: '<'
+                items: '<',
+                message: '<',
+                onRemove: '&'
             },
             templateUrl: 'foundItems.html',
             controller: NarrowItDownController,
@@ -22,23 +24,48 @@
     }
 
     NarrowItDownController.$inject = ['MenuSearchService'];
-    function NarrowItDownController (service) {
+    function NarrowItDownController (MenuSearchService) {
         var menu = this;
+        menu.searchTerm = '';
+        menu.message = '';
+        menu.found = [];
 
-        var promise = service.getMatchedMenuItems('');
-        promise.then(function (result) {
-            menu.found = result;
-            console.log(menu);
-        });
+        menu.narrowDown = function () {
+            var promise = MenuSearchService.getMatchedMenuItems(menu.searchTerm);
+
+            promise.then(function (response) {
+                if (!response.length)
+                    menu.message = "Nothing found";
+                menu.found = response;
+            });
+        };
+
+        menu.removeItem = function (index) {
+            if (index < 0 || index >= menu.found.length)
+                return;
+            menu.found.splice(index, 1);
+        }
     }
 
-    MenuSearchService.$inject = ['$http', 'menuUrl'];
-    function MenuSearchService ($http, menuUrl) {
+    MenuSearchService.$inject = ['$q', '$http', 'menuUrl'];
+    function MenuSearchService ($q, $http, menuUrl) {
         var service = this;
 
         service.getMatchedMenuItems = function (searchTerm) {
-            return $http.get(menuUrl).then(function (response) {
-                return response.data['menu_items'];
+            if (searchTerm === '')
+                return $q(function (resolve, reject) {
+                    resolve([]);
+                });
+
+            let promise = $http.get(menuUrl);
+
+            function searchInDescription(item) {
+                return item['description'].toLowerCase().includes(searchTerm);
+            }
+
+            return promise.then(function (response) {
+                let items = response.data['menu_items'];
+                return items.filter(searchInDescription);
             });
         }
     }
