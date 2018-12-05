@@ -1,11 +1,12 @@
 (function () {
     'use strict';
 
-    var app = angular.module('NarrowItDownApp', []);
-    app.controller('NarrowItDownController', NarrowItDownController);
-    app.service('MenuSearchService', MenuSearchService);
-    app.directive('foundItems', FoundItemsDirective);
-    app.value('menuUrl', "https://davids-restaurant.herokuapp.com/menu_items.json");
+    angular.module('NarrowItDownApp', [])
+        .controller('NarrowItDownController', NarrowItDownController)
+        .service('MenuSearchService', MenuSearchService)
+        .directive('foundItems', FoundItemsDirective)
+        .value('menuUrl', "https://davids-restaurant.herokuapp.com/menu_items.json");
+
 
     function FoundItemsDirective () {
         var ddo = {
@@ -23,6 +24,7 @@
         return ddo;
     }
 
+
     NarrowItDownController.$inject = ['MenuSearchService'];
     function NarrowItDownController (MenuSearchService) {
         var menu = this;
@@ -30,13 +32,16 @@
         menu.message = '';
         menu.found = [];
 
+        menu.updateMessage = function () {
+            menu.message = menu.found.length ? '' : 'Nothing found';
+        };
+
         menu.narrowDown = function () {
             var promise = MenuSearchService.getMatchedMenuItems(menu.searchTerm);
 
             promise.then(function (response) {
-                if (!response.length)
-                    menu.message = "Nothing found";
                 menu.found = response;
+                menu.updateMessage();
             });
         };
 
@@ -44,8 +49,10 @@
             if (index < 0 || index >= menu.found.length)
                 return;
             menu.found.splice(index, 1);
+            menu.updateMessage();
         }
     }
+
 
     MenuSearchService.$inject = ['$q', '$http', 'menuUrl'];
     function MenuSearchService ($q, $http, menuUrl) {

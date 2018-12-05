@@ -12,20 +12,25 @@
 <div class="container" ng-controller="NarrowItDownController as menu">
     <h1>Narrow Down Your Chinese Menu Choice</h1>
 
-    <div class="form-group">
+    <div class="row">
+        <div class="col-md-12 my-3">
+        <div class="input-group">
            <input type="text" placeholder="search term" class="form-control"
                   ng-model="menu.searchTerm"
                   ng-keypress="$event.keyCode == 13 && menu.narrowDown()">
-    </div>
-
-    <div class="form-group narrow-button">
-           <button class="btn btn-primary" ng-click="menu.narrowDown()">Narrow It Down For Me!</button>
+            <div class="input-group-append">
+                <button class="btn btn-primary" ng-click="menu.narrowDown()">Narrow It Down For Me!</button>
+            </div>
+        </div>
+        </div>
     </div>
 
     <div class="row">
+        <div class="col-md-12 my-3">
         <found-items items="menu.found"
                      message="menu.message"
                      on-remove="menu.removeItem(index)"></found-items>
+        </div>
     </div>
 
 </div>
