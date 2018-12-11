@@ -14,12 +14,15 @@
 
     <div class="row">
         <div class="col-md-12 my-3">
-        <div class="input-group">
+        <div class="input-group input-group-lg">
            <input type="text" placeholder="search term" class="form-control"
                   ng-model="menu.searchTerm"
                   ng-keypress="$event.keyCode == 13 && menu.narrowDown()">
-            <div class="input-group-append">
-                <button class="btn btn-primary" ng-click="menu.narrowDown()">Narrow It Down For Me!</button>
+            <div class="input-group-append w-25">
+                <button class="btn btn-primary btn-block" ng-click="menu.narrowDown()">
+                    <span ng-show="menu.spinner"><i class="glyphicon glyphicon-refresh spinning"></i></span>
+                    {{ menu.buttonText }}
+                </button>
             </div>
         </div>
         </div>
@@ -29,6 +32,7 @@
         <div class="col-md-12 my-3">
         <found-items items="menu.found"
                      message="menu.message"
+                     button-text="menu.rejectText"
                      on-remove="menu.removeItem(index)"></found-items>
         </div>
     </div>
