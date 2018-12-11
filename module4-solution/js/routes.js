@@ -14,6 +14,11 @@
             .state('home', {
                 url: '/',
                 templateUrl: 'templates/home.template.html'
+            })
+
+            .state('categories', {
+                url: '/categories',
+                templateUrl: 'templates/categories.template.html'
             });
     }
 })();
