@@ -22,8 +22,23 @@
                 controller: 'CategoriesTabController',
                 controllerAs: '$ctrl',
                 resolve: {
-                    categories: ['MenuDataService', function(MenuDataService) {
+                    categories: ['MenuDataService', function (MenuDataService) {
                         return MenuDataService.getAllCategories();
+                    }]
+                }
+            })
+
+            .state('menuitems', {
+                url: '/menuitems/{shortName}',
+                templateUrl: 'templates/items-tab.template.html',
+                controller: 'MenuItemsTabController',
+                controllerAs: '$ctrl',
+                params: {
+                    shortName: null
+                },
+                resolve: {
+                    items: ['MenuDataService', function (MenuDataService) {
+                        return MenuDataService.getItemsForCategory(shortName);
                     }]
                 }
             });

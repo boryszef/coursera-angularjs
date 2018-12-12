@@ -12,6 +12,10 @@
             return $http.get(url).then(function (response) {
                 return response.data;
             });
+        };
+
+        service.getItemsForCategory = function () {
+            let url = config.base
         }
     }
 })();
