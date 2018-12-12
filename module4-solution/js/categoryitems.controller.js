@@ -7,6 +7,6 @@
     function CategoryItemsTabController(items) {
         var $ctrl = this;
 
-        console.log(items);
+        $ctrl.items = items.menu_items;
     }
 })();

@@ -20,7 +20,6 @@
                 category: short
             };
             return $http.get(url, {params: params}).then(function (response) {
-                console.log(short, url, params);
                 return response.data;
             });
         }
