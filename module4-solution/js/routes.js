@@ -10,7 +10,6 @@
 
         $stateProvider
 
-            // Home page
             .state('home', {
                 url: '/',
                 templateUrl: 'templates/home-tab.template.html'
@@ -28,14 +27,14 @@
                 }
             })
 
-            .state('category', {
-                url: '/category/{shortName}',
-                templateUrl: 'templates/categoryitems-tab.template.html',
-                controller: 'CategoryItemsTabController',
+            .state('items', {
+                url: '/categories/{shortName:[A-Z0-9]{1,4}}',
+                templateUrl: 'templates/items-tab.template.html',
+                controller: 'ItemsTabController',
                 controllerAs: '$ctrl',
                 resolve: {
-                    items: ['MenuDataService', '$transition$', function (MenuDataService, $transition$) {
-                        return MenuDataService.getItemsForCategory($transition$.params().shortName);
+                    items: ['MenuDataService', '$stateParams', function (MenuDataService, $stateParams) {
+                        return MenuDataService.getItemsForCategory($stateParams.shortName);
                     }]
                 }
             });
