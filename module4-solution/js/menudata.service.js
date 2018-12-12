@@ -14,8 +14,15 @@
             });
         };
 
-        service.getItemsForCategory = function () {
-            let url = config.base
+        service.getItemsForCategory = function (short) {
+            let url = config.baseUrl + config.itemsSuffix;
+            let params = {
+                category: short
+            };
+            return $http.get(url, {params: params}).then(function (response) {
+                console.log(short, url, params);
+                return response.data;
+            });
         }
     }
 })();

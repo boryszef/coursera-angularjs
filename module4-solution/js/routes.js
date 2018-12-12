@@ -28,17 +28,14 @@
                 }
             })
 
-            .state('menuitems', {
-                url: '/menuitems/{shortName}',
-                templateUrl: 'templates/items-tab.template.html',
-                controller: 'MenuItemsTabController',
+            .state('category', {
+                url: '/category/{shortName}',
+                templateUrl: 'templates/categoryitems-tab.template.html',
+                controller: 'CategoryItemsTabController',
                 controllerAs: '$ctrl',
-                params: {
-                    shortName: null
-                },
                 resolve: {
-                    items: ['MenuDataService', function (MenuDataService) {
-                        return MenuDataService.getItemsForCategory(shortName);
+                    items: ['MenuDataService', '$transition$', function (MenuDataService, $transition$) {
+                        return MenuDataService.getItemsForCategory($transition$.params().shortName);
                     }]
                 }
             });
