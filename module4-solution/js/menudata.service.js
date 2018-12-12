@@ -9,7 +9,9 @@
 
         service.getAllCategories = function () {
             let url = config.baseUrl + config.categoriesSuffix;
-            return $http.get(url);
+            return $http.get(url).then(function (response) {
+                return response.data;
+            });
         }
     }
 })();

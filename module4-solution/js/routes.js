@@ -13,12 +13,19 @@
             // Home page
             .state('home', {
                 url: '/',
-                templateUrl: 'templates/home.template.html'
+                templateUrl: 'templates/home-tab.template.html'
             })
 
             .state('categories', {
                 url: '/categories',
-                templateUrl: 'templates/categories.template.html'
+                templateUrl: 'templates/categories-tab.template.html',
+                controller: 'CategoriesTabController',
+                controllerAs: '$ctrl',
+                resolve: {
+                    categories: ['MenuDataService', function(MenuDataService) {
+                        return MenuDataService.getAllCategories();
+                    }]
+                }
             });
     }
 })();
