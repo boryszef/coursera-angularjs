@@ -22,9 +22,6 @@
                 resolve: {
                     categories: ['MenuDataService', function (MenuDataService) {
                         return MenuDataService.getAllCategories();
-                    }],
-                    path: ['$state', function ($state) {
-                        return $state.$current.path;
                     }]
                 }
             })
