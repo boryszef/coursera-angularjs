@@ -1,22 +1,22 @@
 <div class="accordion" id="items{{ $ctrl.category }}">
   <div class="card" ng-repeat="item in $ctrl.list">
-    <div class="card-header" id="heading{{ item.short_name }}">
+    <div class="card-header" id="heading{{ item.shortName }}">
       <h5 class="mb-0">
         <button class="btn btn-link {{ item.active ? '' : collapsed }}"
                 type="button"
                 data-toggle="collapse"
-                data-target="#collapse{{ item.short_name }}"
+                data-target="#collapse{{ item.shortName }}"
                 aria-expanded="{{ item.active }}"
-                aria-controls="collapse{{ item.short_name }}"
+                aria-controls="collapse{{ item.shortName }}"
                 ng-click="$ctrl.onToggle({index: $index})">
-          {{ item.name }} ({{ item.short_name }})
+          {{ item.name }} ({{ item.shortName }})
         </button>
       </h5>
     </div>
 
-    <div id="collapse{{ item.short_name }}"
+    <div id="collapse{{ item.shortName }}"
          class="collapse {{ item.active ? 'show' : ''}}"
-         aria-labelledby="heading{{ item.short_name }}"
+         aria-labelledby="heading{{ item.shortName }}"
          data-parent="#items{{ $ctrl.category }}">
       <div class="card-body">
         {{ item.description }}
