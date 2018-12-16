@@ -1,5 +1,26 @@
-<ul>
-    <li ng-repeat="item in $ctrl.list">
-        {{ item.name }} / {{ item.short_name }} / {{ item.description }}
-    </li>
-</ul>
+<div class="accordion" id="items{{ $ctrl.category }}">
+  <div class="card" ng-repeat="item in $ctrl.list">
+    <div class="card-header" id="heading{{ item.short_name }}">
+      <h5 class="mb-0">
+        <button class="btn btn-link {{ item.active ? '' : collapsed }}"
+                type="button"
+                data-toggle="collapse"
+                data-target="#collapse{{ item.short_name }}"
+                aria-expanded="{{ item.active }}"
+                aria-controls="collapse{{ item.short_name }}"
+                ng-click="$ctrl.onToggle({index: $index})">
+          {{ item.name }} ({{ item.short_name }})
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapse{{ item.short_name }}"
+         class="collapse {{ item.active ? 'show' : ''}}"
+         aria-labelledby="heading{{ item.short_name }}"
+         data-parent="#items{{ $ctrl.category }}">
+      <div class="card-body">
+        {{ item.description }}
+      </div>
+    </div>
+  </div>
+</div>

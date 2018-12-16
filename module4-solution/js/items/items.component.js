@@ -4,7 +4,9 @@
     angular.module('MenuApp').component('items', {
         templateUrl: 'templates/items.template.html',
         bindings: {
-            list: '<'
+            list: '<',
+            category: '<',
+            onToggle: '&'
         }
     });
 
