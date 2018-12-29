@@ -9,7 +9,6 @@
 
         service.saveRecipient = function (customer) {
             service.recipient = customer;
-            console.log(service.recipient);
         };
 
         service.getRecipient = function () {

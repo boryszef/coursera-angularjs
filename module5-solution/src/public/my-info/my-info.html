@@ -1,5 +1,5 @@
 <div class="container" ng-if="ctrl.customer">
-    <h1>Your data & preferences:</h1>
+    <h1>Your data & preferences</h1>
     <div class="row">
         <div class="col-sm-3">First name(s):</div><div class="col-md-9">{{ ctrl.customer.firstName }}</div>
     </div>
@@ -13,8 +13,10 @@
         <div class="col-sm-3">Your phone number:</div><div class="col-md-9">{{ ctrl.customer.phone }}</div>
     </div>
     <div class="row">
+        <div class="col-sm-12">
         Your favourite plate:<br />
         <menu-item menu-item="ctrl.favourite"></menu-item>
+        </div>
     </div>
 </div>
 

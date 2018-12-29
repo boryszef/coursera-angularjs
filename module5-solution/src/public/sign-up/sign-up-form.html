@@ -74,10 +74,13 @@ Sign up to receive our newsletter!
                id="signUpFavourite"
                aria-describedby="favouriteHelp"
                ng-model="ctrl.favourite"
-               placeholder="Enter the code of the dish">
+               placeholder="Enter the code of the dish"
+               ng-model-options="{debounce: 500}"
+               valid-item>
         <small id="favouriteHelp"
                class="form-text text-light"
-               ng-if="!ctrl.favouriteValid">No such menu number exists.</small>
+               ng-if="newsletterForm.favourite.$invalid">
+            No such menu number exists.</small>
     </div>
     <button type="submit"
             class="btn btn-primary"
