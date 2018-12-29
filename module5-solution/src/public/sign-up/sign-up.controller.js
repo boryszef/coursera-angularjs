@@ -3,9 +3,11 @@
 
     angular.module('public').controller('signUpController', signUpController);
 
-    signUpController.$inject = ['newsletterService'];
-    function signUpController(newsletterService) {
+    signUpController.$inject = ['newsletterService', 'MenuService'];
+    function signUpController(newsletterService, MenuService) {
         var ctrl = this;
+        ctrl.dataSaved = false;
+        ctrl.favouriteValid = true;
 
         ctrl.submit = function () {
             newsletterService.saveRecipient({
@@ -15,6 +17,14 @@
                 phone: ctrl.phone,
                 favourite: ctrl.favourite
             });
+
+            MenuService.getSingleItem(ctrl.favourite).then(function () {
+                ctrl.favouriteValid = true;
+            }, function (x) {
+                ctrl.favouriteValid = false;
+            });
+
+            ctrl.dataSaved = true;
         };
     }
 })();

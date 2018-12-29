@@ -12,7 +12,11 @@ Sign up to receive our newsletter!
                placeholder="Enter your first name(s)"
                ng-model="ctrl.firstName"
                required>
-        <small id="firstNameHelp" class="form-text text-light">We'll never share your email with anyone else.</small>
+        <small id="firstNameHelp"
+               class="form-text text-light"
+               ng-if="newsletterForm.firstName.$error.required && newsletterForm.firstName.$touched">
+            You must provide a first name.
+        </small>
     </div>
     <div class="form-group">
         <label for="signUpLastName">Last name:</label>
@@ -24,7 +28,11 @@ Sign up to receive our newsletter!
                placeholder="Enter your last name(s)"
                ng-model="ctrl.lastName"
                required>
-        <small id="lastNameHelp" class="form-text text-light">We'll never share your email with anyone else.</small>
+        <small id="lastNameHelp"
+               class="form-text text-light"
+               ng-if="newsletterForm.lastName.$error.required && newsletterForm.lastName.$touched">
+            You must provide your last name.
+        </small>
     </div>
     <div class="form-group">
         <label for="signUpEmail">E-mail address:</label>
@@ -36,7 +44,11 @@ Sign up to receive our newsletter!
                placeholder="Enter your e-mail address"
                ng-model="ctrl.email"
                required>
-        <small id="emailHelp" class="form-text text-light">We'll never share your email with anyone else.</small>
+        <small id="emailHelp"
+               class="form-text text-light"
+               ng-if="newsletterForm.email.$invalid && newsletterForm.email.$touched">
+            The email is either empty or invalid.
+        </small>
     </div>
     <div class="form-group">
         <label for="signUpPhone">Phone number:</label>
@@ -47,12 +59,12 @@ Sign up to receive our newsletter!
                aria-describedby="phoneHelp"
                placeholder="Enter your phone number"
                ng-model="ctrl.phone"
-               ng-pattern="/^\+?[0-9 -]+$/"
+               ng-pattern="/^\+?[0-9. -]+$/"
                required>
         <small id="phoneHelp"
                class="form-text text-light"
                ng-if="newsletterForm.phone.$invalid && newsletterForm.phone.$touched">
-            Phone number may contain only digits, space, hyphen or a leading plus sign.</small>
+            Phone number may contain only digits, space, dot, hyphen or a leading plus sign.</small>
     </div>
     <div class="form-group">
         <label for="signUpFavourite">Menu number of your favourite plate:</label>
@@ -63,12 +75,16 @@ Sign up to receive our newsletter!
                aria-describedby="favouriteHelp"
                ng-model="ctrl.favourite"
                placeholder="Enter the code of the dish">
-        <small id="favouriteHelp" class="form-text text-light">We'll never share your email with anyone else.</small>
+        <small id="favouriteHelp"
+               class="form-text text-light"
+               ng-if="!ctrl.favouriteValid">No such menu number exists.</small>
     </div>
     <button type="submit"
             class="btn btn-primary"
             ng-disabled="newsletterForm.$invalid"
             ng-click="ctrl.submit()">Submit</button>
 </form>
+
+    <div ng-show="ctrl.dataSaved">Your information has been saved.</div>
 
 </div>
