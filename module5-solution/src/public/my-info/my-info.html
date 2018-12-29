@@ -1,0 +1,23 @@
+<div class="container" ng-if="ctrl.customer">
+    <h1>Your data & preferences:</h1>
+    <div class="row">
+        <div class="col-sm-3">First name(s):</div><div class="col-md-9">{{ ctrl.customer.firstName }}</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">Last name(s):</div><div class="col-md-9">{{ ctrl.customer.lastName }}</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">Your e-mail address:</div><div class="col-md-9">{{ ctrl.customer.email }}</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">Your phone number:</div><div class="col-md-9">{{ ctrl.customer.phone }}</div>
+    </div>
+    <div class="row">
+        Your favourite plate:<br />
+        <menu-item menu-item="ctrl.favourite"></menu-item>
+    </div>
+</div>
+
+<div class="container" ng-if="ctrl.customer === undefined">
+    <div class="row">Not Signed Up Yet. <a ui-sref="public.signup">Sign up Now!</a></div>
+</div>

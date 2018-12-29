@@ -11,5 +11,9 @@
             service.recipient = customer;
             console.log(service.recipient);
         };
+
+        service.getRecipient = function () {
+            return service.recipient;
+        }
     }
 })();
